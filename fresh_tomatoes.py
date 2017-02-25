@@ -1,11 +1,15 @@
 import webbrowser
 import os
-import re
 import jinja2
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
                                autoescape=True)
+
+
+def render_template(template, **params):
+    t = jinja_env.get_template(template)
+    return t.render(params)
 
 
 # The main page layout and title bar
@@ -55,19 +59,13 @@ def create_movie_tiles_content(movies):
     # The HTML content for this section of the page
     content = ''
     for movie in movies:
-        # Extract the youtube ID from the url
-        youtube_id_match = re.search(
-            r'(?<=v=)[^&#]+', movie.trailer_youtube_url)
-        youtube_id_match = youtube_id_match or re.search(
-            r'(?<=be/)[^&#]+', movie.trailer_youtube_url)
-        trailer_youtube_id = (youtube_id_match.group(0) if youtube_id_match
-                              else None)
+       
 
         # Append the tile for the movie with its content filled in
         content += movie_tile_content.format(
             movie_title=movie.title,
             poster_image_url=movie.poster_image_url,
-            trailer_youtube_id=trailer_youtube_id
+            trailer_youtube_id=movie.yt_trailer_id
         )
     return content
 
@@ -81,9 +79,8 @@ def open_movies_page(movies):
         movie_tiles=create_movie_tiles_content(movies))
 
     # Output the file
-    t = jinja_env.get_template('main_page_head.html')
 
-    output_file.write(t.render() + rendered_content)
+    output_file.write(render_template('main_page_head.html') + rendered_content)
     output_file.close()
 
     # open the output file in the browser (in a new tab, if possible)
