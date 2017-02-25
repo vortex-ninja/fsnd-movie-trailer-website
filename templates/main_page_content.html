@@ -23,7 +23,8 @@
       </div>
     </div>
     <div class="container">
-    <!-- Append the tile for the movie with its content filled in -->
+    <!-- Create movie tiles -->
+
       {% for movie in movies %}
          <div class="col-md-6 col-lg-4 movie-tile text-center" 
          data-trailer-youtube-id="{{ movie.yt_trailer_id }}"data-toggle="modal" data-target="#trailer">
