@@ -24,3 +24,7 @@ def open_movies_page(movies):
     url = os.path.abspath(output_file.name)
     webbrowser.open('file://' + url, new=2)
 
+
+def sort_by_rating(movies):
+    """displays page with movies sorted by rating"""
+    return sorted(movies, key=lambda x: x.rating, reverse=True)
