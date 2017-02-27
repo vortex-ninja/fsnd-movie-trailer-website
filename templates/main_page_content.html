@@ -26,15 +26,35 @@
     <!-- Create movie tiles -->
 
       {% for movie in movies %}
-         <div class="col-md-6 col-lg-4 movie-tile text-center" 
-         data-trailer-youtube-id="{{ movie.yt_trailer_id }}"data-toggle="modal" data-target="#trailer">
-            <img src="{{ movie.poster_image_url }}" width="220" height="342">
-            <span>
-                <h2>{{ movie.title }}</h2>
-                <p>IMDb Rating: {{movie.rating}}</p>
-            </span>
-         </div>
-      {% endfor %}
+
+        
+
+         <div class="col-md-6 col-lg-4 movie-tile text-center"
+         {% if movie.trailer_youtube_id %} 
+           data-trailer-youtube-id="{{ movie.trailer_youtube_id }}"data-toggle="modal" data-target="#trailer"
+         {% endif %}
+           >
+           <div>
+           {% if not movie.trailer_youtube_id and movie.imdb_id %}
+              <a class="imdb-link" href="http://www.imdb.com/">
+           {% endif %}
+              <img src="{{ movie.poster_image_url }}" width="220" height="342">
+             
+              <div class="movie-info">         
+                  <h2>{{ movie.title }}</h2>
+                  <p>IMDb Rating: {{movie.rating}}</p>
+              </div>
+
+            {% if not movie.trailer_youtube_id and movie.imdb_id %}
+              </a>
+            {% endif %}
+          </div>
+           </div>
+          
+
+
+
+    {% endfor %}
     
 
     </div>
