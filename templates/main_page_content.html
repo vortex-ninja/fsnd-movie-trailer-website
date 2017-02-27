@@ -36,7 +36,7 @@
            >
            <div>
            {% if not movie.trailer_youtube_id and movie.imdb_id %}
-              <a class="imdb-link" href="http://www.imdb.com/">
+              <a class="imdb-link" href="{{ movie.imdb_url }}">
            {% endif %}
               <img src="{{ movie.poster_image_url }}" width="220" height="342">
              

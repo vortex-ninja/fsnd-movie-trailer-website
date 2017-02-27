@@ -1,6 +1,5 @@
 """Class definition for movie object"""
 
-import webbrowser
 import imdb
 import re
 
@@ -46,6 +45,7 @@ class Movie():
             else:
                 if 'cover_url' in movie.keys():
                     poster_image_url = movie['cover url']
+            imdb_url = "http://www.imdb.com/title/tt" + imdb_id + "/"
 
         # Extract the youtube ID from the url
 
@@ -57,12 +57,14 @@ class Movie():
             trailer_youtube_id = (youtube_id_match.group(0)
                                   if youtube_id_match else None)
 
+
         if 'title' in kwargs:
             title = kwargs['title']
         if 'storyline' in kwargs:
             storyline = kwargs['storyline']
 
         self.imdb_id = imdb_id
+        self.imdb_url = imdb_url
         self.title = title
         self.storyline = storyline
         self.trailer_youtube_url = trailer_youtube_url
@@ -70,3 +72,7 @@ class Movie():
         self.rating = rating
         self.trailer_youtube_id = trailer_youtube_id
         self.year = year
+
+        print "[+] Movie '" + self.title + "' object created"
+
+
