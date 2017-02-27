@@ -2,6 +2,8 @@ import webbrowser
 import os
 import jinja2
 import codecs
+import imdb
+import media
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
@@ -28,3 +30,17 @@ def open_movies_page(movies):
 def sort_by_rating(movies):
     """displays page with movies sorted by rating"""
     return sorted(movies, key=lambda x: x.rating, reverse=True)
+
+
+def between_years(min_year=0, max_year=9999, limit=9):
+
+    imdb_access = imdb.IMDb()
+    top250 = imdb_access.get_top250_movies()
+
+    results = []
+    for movie in top250:
+        if movie['year'] >= min_year and movie['year'] <= max_year:
+            results.append(media.Movie(imdb_id=movie.movieID))
+        if (len(results) >= limit):
+            return results
+    return results
