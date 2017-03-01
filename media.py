@@ -8,24 +8,28 @@ class Movie():
     """test doc string"""
     def __init__(self, **kwargs):
 
-        imdb_id = None
         imdb_url = None
-        title = 'no_title'
-        storyline = 'no storyline'
+        title = None
+        storyline = None
         trailer_youtube_url = None
         trailer_youtube_id = None
         rating = None
         year = None
         poster_image_url = None
 
-        if 'imdb_id' in kwargs:
-            imdb_id = kwargs['imdb_id']
+        def get_imdb_id():
+            imdb_id = None
+            if 'imdb_id' in kwargs:
+                imdb_id = kwargs['imdb_id']
+            
+            # Extract movie ID from url
+            if 'imdb_url' in kwargs and not imdb_id:
+                imdb_url = kwargs['imdb_url']
+                imdb_id_match = re.search(r'(?<=tt)[0-9]+', imdb_url)
+                imdb_id = imdb_id_match.group(0) if imdb_id_match else None
+            return imdb_id
 
-        # Extract movie ID from url
-        if 'imdb_url' in kwargs and not imdb_id:
-            imdb_url = kwargs['imdb_url']
-            imdb_id_match = re.search(r'(?<=tt)[0-9]+', imdb_url)
-            imdb_id = imdb_id_match.group(0) if imdb_id_match else None
+        imdb_id = get_imdb_id()
 
         # Access movie object through IMDb API
 
