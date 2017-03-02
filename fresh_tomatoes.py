@@ -1,3 +1,5 @@
+"""functions that display, operate on class Movie objects"""
+
 import webbrowser
 import os
 import jinja2
@@ -16,8 +18,8 @@ def render_template(template, **params):
 
 
 def open_movies_page(movies):
+    """creates an html file and renders templates in it"""
 
-    # create a file and render templates in it
     with codecs.open('fresh_tomatoes.html', 'w', encoding="utf-8") as output_file:
         output_file.write(render_template('main_page_head.html') +
                           render_template('main_page_content.html', movies=movies))
@@ -28,11 +30,13 @@ def open_movies_page(movies):
 
 
 def sort_by_rating(movies):
-    """displays page with movies sorted by rating"""
+    """returns a list with movies sorted by rating"""
     return sorted(movies, key=lambda x: x.rating, reverse=True)
 
 
-def between_years(min_year=0, max_year=9999, limit=9):
+def between_years(min_year=0, max_year=9999, n=9):
+    """returns top n movies from imdb top250 list
+    produced between min_year and max_year"""
 
     imdb_access = imdb.IMDb()
     top250 = imdb_access.get_top250_movies()
@@ -41,6 +45,6 @@ def between_years(min_year=0, max_year=9999, limit=9):
     for movie in top250:
         if movie['year'] >= min_year and movie['year'] <= max_year:
             results.append(media.Movie(imdb_id=movie.movieID))
-        if (len(results) >= limit):
+        if (len(results) >= n):
             return results
     return results
