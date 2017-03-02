@@ -38,3 +38,16 @@
             top: 0;
             background-color: white;
         }
+
+        .movie-info {
+            height:150px;
+        }
+
+        .imdb-link {
+            color: inherit;
+            text-decoration: none;
+        }
+        .imdb-link:hover {
+            color: inherit;
+            text-decoration: none;
+        }
