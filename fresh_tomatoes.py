@@ -48,3 +48,14 @@ def between_years(min_year=0, max_year=9999, n=9):
         if (len(results) >= n):
             return results
     return results
+
+
+def filter_movies(movies, *args):
+    """returns a list of Movie objects that have
+       attributes specified in args"""
+
+    results = []
+    for movie in movies:
+        if set(args) <= set(movie.__dict__.keys()):
+            results.append(movie)
+    return results
