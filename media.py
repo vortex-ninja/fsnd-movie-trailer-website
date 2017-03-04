@@ -5,7 +5,7 @@ import re
 
 
 class Movie():
-    """test doc string"""
+    """class that stores information about a movie"""
     def __init__(self, **kwargs):
 
         # a dictionary that will be used to set object's instance attributes
@@ -78,4 +78,4 @@ class Movie():
         for key, value in attributes.items():
             setattr(self, key, value)
 
-        print "Movie '%s' object created" % getattr(self, 'title', 'title missing')
+        print "[+] Movie '%s' object created" % getattr(self, 'title', 'title missing')
