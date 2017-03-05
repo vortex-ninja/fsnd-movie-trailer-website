@@ -10,15 +10,16 @@ In case you would like to use it without IMDb API support please remove
 line `import imdb` from media.py and fresh_tomatoes.py and don't pass *imdb_id* or *imdb_url* as a parameters when creating Movie object.
 
 ###Functions implemented:
-* `open_movies_page(movies)`: renders an html file with movies passed as a list of Movie objects
-* `sort_by_rating(movies)`: sorts a list of Movie objects by rating
+* `open_movies_page(movies)`: renders an html file with movies passed as a list of *Movie* objects
+* `sort_by_rating(movies)`: sorts a list of *Movie* objects by rating
 * `between_years(min_year=0, max_year=9999, n=9)`: returns a list of *n* movies made between years *min_year* and *max_year*
-* `filter_movies(movies, *args)`: returns a list of Movie objects that have attributes given as args parameters
+* `filter_movies(movies, *args)`: returns a list of *Movie* objects that have attributes given as *args* parameters
 
 ###How to use:
-You can create a list of Movie objects in two ways:
+You should create objects and place function calls in entertainment_center.py file.
+*Movie* objects can be created two ways:
 1. Create objects yourself and put them in a list
-2. Use `between_years()` function to generate a list of Movie objects
+2. Use `between_years()` function to generate a list of *Movie* objects
 
 When you create objects yourself you can pass as many keyword parameters as you want.
 Parameters that are used to display information in a rendered file are:
@@ -36,7 +37,7 @@ If other parameters are also present they will overwrite those assigned by infor
 
 ###Example
 
-You create Movie object big_lebowski by putting this line of code in entertainment_center.py:
+You create *Movie* object *big_lebowski* by putting this line of code in entertainment_center.py:
 `big_lebowski = media.Movie(title="Big Lebowski", imdb_id="0118715", youtube_trailer_url="https://www.youtube.com/watch?v=cd-go0oBF4Y")`
 
 Some of the assigned attributes will be:
@@ -47,5 +48,3 @@ Some of the assigned attributes will be:
 * *rating*: This will come from IMDb if available
 
 This object on click will show youtube trailer.
-
-
