@@ -18,6 +18,7 @@ as parameters when creating Movie object.
 
 ###How to use:
 You should create objects and place function calls in entertainment_center.py file.
+To start the application run the entertainment_center.py file.
 Movie objects can be created in two ways:
 * Create objects yourself and put them in a list
 * Use `between_years()` function to generate a list of Movie objects
