@@ -8,7 +8,7 @@ Renders an HTML file with basic information about movies shown on page as movie 
 To work properly package [IMDbPY](http://imdbpy.sourceforge.net/) is required.
 In case you would like to use it without IMDb API support please remove
 line `import imdb` from media.py and fresh_tomatoes.py and don't pass imdb_id or imdb_url
-as a parameters when creating Movie object.
+as parameters when creating Movie object.
 
 ###Functions implemented:
 * `open_movies_page(movies)`: renders an html file with movies passed as a list of Movie objects
@@ -18,7 +18,7 @@ as a parameters when creating Movie object.
 
 ###How to use:
 You should create objects and place function calls in entertainment_center.py file.
-Movie objects can be created two ways:
+Movie objects can be created in two ways:
 * Create objects yourself and put them in a list
 * Use `between_years()` function to generate a list of Movie objects
 
@@ -40,7 +40,8 @@ If other parameters are also present they will overwrite those assigned by infor
 ###Example
 
 You create Movie object big_lebowski by putting this line of code in entertainment_center.py:
-`big_lebowski = media.Movie(title="Big Lebowski", imdb_id="0118715", youtube_trailer_url="https://www.youtube.com/watch?v=cd-go0oBF4Y")`
+`big_lebowski = media.Movie(title="Big Lebowski", imdb_id="0118715", 
+                            youtube_trailer_url="https://www.youtube.com/watch?v=cd-go0oBF4Y")`
 
 Some of the assigned attributes will be:
 * title: "Big Lebowski" passed as an argument and not "The Big Lebowski" retrieved through IMDb
