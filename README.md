@@ -1,5 +1,6 @@
-# fsnd-project-1
-Movie Trailer Website
+# Movie Trailer Website
+fsnd-project-1
+
 
 ### Overview:
 Renders an HTML file with basic information about movies shown on page as movie tiles.
