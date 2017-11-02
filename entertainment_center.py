@@ -3,7 +3,7 @@ import media
 
 
 big_lebowski = media.Movie(title="The Big Lebowski",
-                           storyline=u"A flick bout a dude whose rug is stolen.",
+                           storyline=u"A flick about a dude whose rug is stolen.",
                            trailer_youtube_url="https://www.youtube.com/watch?v=cd-go0oBF4Y",
                            imdb_url="http://www.imdb.com/title/tt0118715/?ref_=nv_sr_1")
 
