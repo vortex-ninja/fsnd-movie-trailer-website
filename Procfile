@@ -1,1 +1,1 @@
-web: gunicorn app:fresh_tomatoes
+web: gunicorn app:app
