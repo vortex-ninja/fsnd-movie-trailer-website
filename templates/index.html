@@ -13,10 +13,11 @@
     
     <!-- Local styles -->
 
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     
-    <script charset="utf-8" src="js/functions.js"></script>
+    <script charset="utf-8" src="{{ url_for('static', filename='js/functions.js') }}"></script>
 </head>
+
   <body>
     <!-- Trailer Video Modal -->
     <div class="modal" id="trailer">
