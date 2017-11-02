@@ -1,22 +1,23 @@
-# fsnd-project-1
-Movie Trailer Website
+# Movie Trailer Website
+fsnd-project-1
 
-###Overview:
+
+### Overview:
 Renders an HTML file with basic information about movies shown on page as movie tiles.
 
-###Requirements:
+### Requirements:
 To work properly package [IMDbPY](http://imdbpy.sourceforge.net/) is required.
 In case you would like to use it without IMDb API support please remove
 line `import imdb` from media.py and fresh_tomatoes.py and don't pass imdb_id or imdb_url
 as parameters when creating Movie object.
 
-###Functions implemented:
+### Functions implemented:
 * `open_movies_page(movies)`: renders an html file with movies passed as a list of Movie objects
 * `sort_by_rating(movies)`: sorts a list of Movie objects by rating
 * `between_years(min_year=0, max_year=9999, n=9)`: returns a list of n movies made between years min_year and max_year
 * `filter_movies(movies, *args)`: returns a list of Movie objects that have attributes given as args parameters
 
-###How to use:
+### How to use:
 You should create objects and place function calls in entertainment_center.py file.
 To start the application run the entertainment_center.py file.
 Movie objects can be created in two ways:
@@ -38,7 +39,7 @@ Objects created with either imdb_url or imdb_id parameters will have their attri
 information retrieved through IMDb API.
 If other parameters are also present they will overwrite those assigned by information from IMDb.
 
-###Example
+### Example
 
 You create Movie object big_lebowski by putting this line of code in entertainment_center.py:
 `big_lebowski = media.Movie(title="Big Lebowski", imdb_id="0118715", 
