@@ -1,0 +1,12 @@
+/not_related/*
+
+# pyc files
+*.pyc
+
+# python cache
+
+/__pycache__/*
+
+# pyenv .python-version
+
+.python-version
