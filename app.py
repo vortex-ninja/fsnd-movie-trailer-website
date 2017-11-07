@@ -75,6 +75,7 @@ movies = filter_movies(movies, 'title', 'rating')
 
 
 app = Flask(__name__)
+app.config['PREFERRED_URL_SCHEME'] = 'https'
 
 
 @app.route('/')
@@ -85,6 +86,8 @@ def main_page():
 
 
 # Starts flask server
+
+print(app.config['PREFERRED_URL_SCHEME'])
 
 if __name__ == '__main__':
     app.secret_key = 'Top secret key'
