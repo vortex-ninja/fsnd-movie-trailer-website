@@ -85,6 +85,13 @@ def main_page():
     return render_template('index.html', movies=movies)
 
 
+@app.route('/top-250/<int:min_year>/<int:max_year>/<int:number>')
+def top_250(min_year, max_year, number):
+    """creates an html file and renders templates in it"""
+    movies = between_years(min_year, max_year, number)
+    return render_template('index.html', movies=movies)
+
+
 # Starts flask server
 
 print(app.config['PREFERRED_URL_SCHEME'])
