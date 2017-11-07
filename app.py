@@ -1,6 +1,7 @@
 """functions that display, operate on class Movie objects"""
 
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template
+from movies import movies
 import imdb
 import media
 
@@ -37,41 +38,8 @@ def filter_movies(movies, *args):
     return results
 
 
-big_lebowski = media.Movie(title="The Big Lebowski",
-                           storyline=u"A flick about a dude whose rug is stolen.",
-                           trailer_youtube_url="https://www.youtube.com/watch?v=cd-go0oBF4Y",
-                           imdb_url="http://www.imdb.com/title/tt0118715/?ref_=nv_sr_1")
-
-the_game = media.Movie(imdb_url="http://www.imdb.com/title/tt0119174/",
-                       storyline="A bored with life guy gets to play an interesting game.",
-                       trailer_youtube_url="https://www.youtube.com/watch?v=0kqQNBR09Rc")
-
-clean_shaven = media.Movie(trailer_youtube_url="https://www.youtube.com/watch?v=6aInRjIwjpU",
-                           imdb_id='0106579')
-
-memento = media.Movie(title=u"Memento",
-                      imdb_url="http://www.imdb.com/title/tt0209144/",
-                      trailer_youtube_url="https://www.youtube.com/watch?v=0vS0E9bBSL0")
-
-twelve_monkeys = media.Movie(imdb_id="0114746",
-                             trailer_youtube_url="https://www.youtube.com/watch?v=wuggl3cZD8A")
-
-moon = media.Movie(imdb_id="1182345",
-                   trailer_youtube_url="https://www.youtube.com/watch?v=twuScTcDP_Q")
-
-empty_movie = media.Movie()
-
-movies = [big_lebowski, the_game, clean_shaven, memento, twelve_monkeys, moon,
-          empty_movie]
-
 # removes films that don't have at least 'title' and 'rating' attributes
 movies = filter_movies(movies, 'title', 'rating')
-
-# sorts movies by imdb rating
-# movies = sort_by_rating(movies)
-
-# creates a sublist of movies from IMDb Top 250 list
-# movies = between_years(1990, 2000, 9)
 
 
 app = Flask(__name__)
@@ -88,13 +56,12 @@ def main_page():
 @app.route('/top-250/<int:min_year>/<int:max_year>/<int:number>')
 def top_250(min_year, max_year, number):
     """creates an html file and renders templates in it"""
+
     movies = between_years(min_year, max_year, number)
     return render_template('index.html', movies=movies)
 
 
 # Starts flask server
-
-print(app.config['PREFERRED_URL_SCHEME'])
 
 if __name__ == '__main__':
     app.secret_key = 'Top secret key'

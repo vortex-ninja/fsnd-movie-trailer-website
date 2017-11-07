@@ -10,14 +10,12 @@
 
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    
+
     <!-- Local styles -->
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    
     <script charset="utf-8" src="{{ url_for('static', filename='js/functions.js') }}"></script>
 </head>
-
   <body>
     <!-- Trailer Video Modal -->
     <div class="modal" id="trailer">
@@ -37,7 +35,7 @@
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">Fresh Tomatoes Movie Trailers</a>
+            <a class="navbar-brand" href="">Fresh Tomatoes Movie Trailers</a>
           </div>
         </div>
       </div>
@@ -48,17 +46,17 @@
       {% for movie in movies %}
 
         <div class="col-md-6 col-lg-4 movie-tile text-center"
-          {% if movie.trailer_youtube_id %} 
+          {% if movie.trailer_youtube_id %}
             data-trailer-youtube-id="{{ movie.trailer_youtube_id }}"data-toggle="modal" data-target="#trailer"
           {% endif %} >
-            
+
             {% if not movie.trailer_youtube_id and movie.imdb_id %}
               <a class="imdb-link" href="{{ movie.imdb_url }}">
             {% endif %}
 
                 <div class="movie-tile-inner">
                   <img src="{{ movie.poster_image_url }}" width="220" height="342">
-                  <div class="movie-info">         
+                  <div class="movie-info">
                     <h2>{{ movie.title }}</h2>
                     <p>IMDb Rating: {{movie.rating}}</p>
                   </div>
@@ -69,7 +67,7 @@
             {% endif %}
 
           </div>
-          
+
       {% endfor %}
 
     </div>

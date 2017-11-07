@@ -1,4 +1,3 @@
-import app
 import media
 
 
@@ -24,19 +23,5 @@ twelve_monkeys = media.Movie(imdb_id="0114746",
 moon = media.Movie(imdb_id="1182345",
                    trailer_youtube_url="https://www.youtube.com/watch?v=twuScTcDP_Q")
 
-empty_movie = media.Movie()
 
-movies = [big_lebowski, the_game, clean_shaven, memento, twelve_monkeys, moon,
-          empty_movie]
-
-# removes films that don't have at least 'title' and 'rating' attributes
-movies = fresh_tomatoes.filter_movies(movies, 'title', 'rating')
-
-# sorts movies by imdb rating
-movies = fresh_tomatoes.sort_by_rating(movies)
-
-# creates a sublist of movies from IMDb Top 250 list
-# movies = fresh_tomatoes.between_years(1990, 2000, 9)
-
-# renders and opens html file
-fresh_tomatoes.open_movies_page(movies)
+movies = [big_lebowski, the_game, clean_shaven, memento, twelve_monkeys, moon]
