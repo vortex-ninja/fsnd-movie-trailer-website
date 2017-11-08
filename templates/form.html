@@ -3,7 +3,10 @@
 
 {% block page_content %}
 <div class="container">
-    <p class="page-header">Query IMDb top 250 list.</p>
-    {{ wtf.quick_form(form) }}
+    <div id='content'>
+        <p class="page-header">Query IMDb top 250 list.</p>
+        {{ wtf.quick_form(form) }}
+    </div>
+    <div id='loading' class='text-center'></div>
 </div>
 {% endblock %}
