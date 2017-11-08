@@ -5,6 +5,7 @@ from forms import QueryForm
 from flask_bootstrap import Bootstrap
 import imdb
 import media
+import json
 
 
 def sort_by_rating(movies):
@@ -54,16 +55,18 @@ def main_page():
 
     form = QueryForm()
     if form.validate_on_submit():
-        session['form_inputs'] = (form.min_year.data,
-                                  form.max_year.data,
-                                  form.number.data)
+        movies = between_years(form.min_year.data,
+                               form.max_year.data,
+                               form.number.data)
+        session['movies'] = [json.dumps(movie.__dict__) for movie in movies]
+        print(session['movies'])
         return redirect(url_for('movie_list'))
     return render_template('form.html', form=form)
 
 
 @app.route('/list', methods=['GET'])
 def movie_list():
-    movies = between_years(*session['form_inputs'])
+    movies = [json.loads(movie) for movie in session['movies']]
     return render_template('main.html', movies=movies)
 
 # Starts flask server

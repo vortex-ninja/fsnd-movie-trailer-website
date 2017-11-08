@@ -78,4 +78,4 @@ class Movie():
         for key, value in attributes.items():
             setattr(self, key, value)
 
-        print "[+] Movie '%s' object created" % getattr(self, 'title', 'title missing')
+        print("[+] Movie '%s' object created" % getattr(self, 'title', 'title missing'))

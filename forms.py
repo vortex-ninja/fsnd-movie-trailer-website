@@ -7,7 +7,7 @@ class QueryForm(FlaskForm):
 
     error_msg = 'Please input a number.'
     min_year = IntegerField('start year:',
-                            default=1800,
+                            default=1990,
                             validators=[Required(message=error_msg)])
     max_year = IntegerField('end year: ',
                             default=9999,
