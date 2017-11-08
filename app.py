@@ -1,7 +1,8 @@
 """functions that display, operate on class Movie objects"""
 
-from flask import Flask, render_template
-from movies import movies
+from flask import Flask, render_template, redirect, url_for, session
+from forms import QueryForm
+from flask_bootstrap import Bootstrap
 import imdb
 import media
 
@@ -39,29 +40,34 @@ def filter_movies(movies, *args):
 
 
 # removes films that don't have at least 'title' and 'rating' attributes
-movies = filter_movies(movies, 'title', 'rating')
 
 
 app = Flask(__name__)
+Bootstrap(app)
 app.config['PREFERRED_URL_SCHEME'] = 'https'
+app.config['SECRET_KEY'] = 'development key'
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def main_page():
     """creates an html file and renders templates in it"""
 
-    return render_template('index.html', movies=movies)
+    form = QueryForm()
+    if form.validate_on_submit():
+        session['form_inputs'] = (form.min_year.data,
+                                  form.max_year.data,
+                                  form.number.data)
+        return redirect(url_for('movie_list'))
+    return render_template('form.html', form=form)
 
 
-@app.route('/top-250/<int:min_year>/<int:max_year>/<int:number>')
-def top_250(min_year, max_year, number):
-    """creates an html file and renders templates in it"""
-
-    movies = between_years(min_year, max_year, number)
-    return render_template('index.html', movies=movies)
-
+@app.route('/list', methods=['GET'])
+def movie_list():
+    movies = between_years(*session['form_inputs'])
+    return render_template('main.html', movies=movies)
 
 # Starts flask server
+
 
 if __name__ == '__main__':
     app.secret_key = 'Top secret key'

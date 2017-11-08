@@ -15,8 +15,12 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <script charset="utf-8" src="{{ url_for('static', filename='js/functions.js') }}"></script>
+    <script charset="utf-8" src="{{ url_for('static', filename='js/loading.js') }}"></script>
 </head>
   <body>
+    <div id="loading"></div>
+    <div id="content">
+
     <!-- Trailer Video Modal -->
     <div class="modal" id="trailer">
       <div class="modal-dialog">
@@ -40,36 +44,6 @@
         </div>
       </div>
     </div>
-    <div class="container">
-    <!-- Create movie tiles -->
-
-      {% for movie in movies %}
-
-        <div class="col-md-6 col-lg-4 movie-tile text-center"
-          {% if movie.trailer_youtube_id %}
-            data-trailer-youtube-id="{{ movie.trailer_youtube_id }}"data-toggle="modal" data-target="#trailer"
-          {% endif %} >
-
-            {% if not movie.trailer_youtube_id and movie.imdb_id %}
-              <a class="imdb-link" href="{{ movie.imdb_url }}">
-            {% endif %}
-
-                <div class="movie-tile-inner">
-                  <img src="{{ movie.poster_image_url }}" width="220" height="342">
-                  <div class="movie-info">
-                    <h2>{{ movie.title }}</h2>
-                    <p>IMDb Rating: {{movie.rating}}</p>
-                  </div>
-                </div>
-
-            {% if not movie.trailer_youtube_id and movie.imdb_id %}
-              </a>
-            {% endif %}
-
-          </div>
-
-      {% endfor %}
-
-    </div>
+    {% block page_content %}{% endblock %}
   </body>
 </html>

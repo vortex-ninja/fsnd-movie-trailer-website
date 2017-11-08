@@ -1,0 +1,9 @@
+{% import 'bootstrap/wtf.html' as wtf %}
+{% extends 'base.html' %}
+
+{% block page_content %}
+<div class="container">
+    <p class="page-header">Query IMDb top 250 list.</p>
+    {{ wtf.quick_form(form) }}
+</div>
+{% endblock %}
