@@ -1,16 +1,11 @@
 """functions that display, operate on class Movie objects"""
 
-from flask import Flask, render_template, redirect, url_for, session
+from flask import Flask, render_template, redirect, url_for, session, flash
 from forms import QueryForm
 from flask_bootstrap import Bootstrap
 import imdb
 import media
 import json
-
-
-def sort_by_rating(movies):
-    """returns a list with movies sorted by rating"""
-    return sorted(movies, key=lambda x: x.rating, reverse=True)
 
 
 def between_years(min_year=0, max_year=9999, n=9):
@@ -59,7 +54,6 @@ def main_page():
                                form.max_year.data,
                                form.number.data)
         session['movies'] = [json.dumps(movie.__dict__) for movie in movies]
-        print(session['movies'])
         return redirect(url_for('movie_list'))
     return render_template('form.html', form=form)
 
@@ -67,6 +61,18 @@ def main_page():
 @app.route('/list', methods=['GET'])
 def movie_list():
     movies = [json.loads(movie) for movie in session['movies']]
+    return render_template('main.html', movies=movies)
+
+@app.route('/sorted_list', methods=['GET'])
+def sort_movies():
+    if 'movies' in session:
+        movies = [json.loads(movie) for movie in session['movies']]
+        for movie in movies:
+            print(type(movie))
+        movies = sort_by_rating(movies)
+    else:
+        flash('No movies to sort.')
+
     return render_template('main.html', movies=movies)
 
 # Starts flask server
