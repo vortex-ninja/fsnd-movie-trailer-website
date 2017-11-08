@@ -63,17 +63,6 @@ def movie_list():
     movies = [json.loads(movie) for movie in session['movies']]
     return render_template('main.html', movies=movies)
 
-@app.route('/sorted_list', methods=['GET'])
-def sort_movies():
-    if 'movies' in session:
-        movies = [json.loads(movie) for movie in session['movies']]
-        for movie in movies:
-            print(type(movie))
-        movies = sort_by_rating(movies)
-    else:
-        flash('No movies to sort.')
-
-    return render_template('main.html', movies=movies)
 
 # Starts flask server
 
