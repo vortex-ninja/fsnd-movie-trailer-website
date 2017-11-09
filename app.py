@@ -1,11 +1,12 @@
 """functions that display, operate on class Movie objects"""
 
-from flask import Flask, render_template, redirect, url_for, session, flash
+from flask import Flask, render_template, redirect, url_for, session
 from forms import QueryForm
 from flask_bootstrap import Bootstrap
 import imdb
 import media
 import json
+import os
 
 
 def between_years(min_year=0, max_year=9999, n=9):
@@ -40,8 +41,9 @@ def filter_movies(movies, *args):
 
 app = Flask(__name__)
 Bootstrap(app)
-app.config['PREFERRED_URL_SCHEME'] = 'https'
-app.config['SECRET_KEY'] = 'development key'
+app.config['PREFERRED_URL_SCHEME'] = os.environ["PREFERRED_URL_SCHEME"]
+app.config['SECRET_KEY'] = os.environ["SECRET_KEY"]
+app.config['DEBUG'] = os.environ["DEBUG"]
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -68,6 +70,5 @@ def movie_list():
 
 
 if __name__ == '__main__':
-    app.secret_key = 'Top secret key'
     # app.debug = True
     app.run(host='0.0.0.0', port=5051)
