@@ -2,6 +2,7 @@
 
 import imdb
 import re
+from codecs import encode
 
 
 class Movie():
@@ -60,7 +61,9 @@ class Movie():
 
             for prop in props:
                 if prop in movie.keys():
-                    attrs[char_replace(prop, [' ', '-'], '_')] = movie[prop]
+                    prop_value = char_replace(prop, [' ', '-'], '_')
+                    prop_value = encode(prop_value, 'utf-8')
+                    attrs[prop_value] = movie[prop]
 
             if 'full_size_cover_url' not in attrs:
                 if 'cover_url' in attrs:
@@ -95,3 +98,5 @@ class Movie():
 
 # test_movie = Movie(imdb_url='http://www.imdb.com/title/tt0167260/')
 # print(test_movie.__dict__)
+# print(type(test_movie.title))
+# print(test_movie.title)
