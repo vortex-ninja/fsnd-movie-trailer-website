@@ -32,13 +32,20 @@ class Movie():
             trailer_youtube_id = None
             if 'trailer_youtube_url' in kwargs:
                 trailer_youtube_url = kwargs['trailer_youtube_url']
-                youtube_id_match = re.search(r'(?<=v=)[^&#]+', trailer_youtube_url)
+                youtube_id_match = re.search(r'(?<=v=)[^&#]+',
+                                             trailer_youtube_url)
                 youtube_id_match = youtube_id_match or re.search(r'(?<=be/)[^&#]+',
-                                                             trailer_youtube_url)
+                                                                 trailer_youtube_url)
                 trailer_youtube_id = (youtube_id_match.group(0)
                                       if youtube_id_match else None)
 
             return trailer_youtube_id
+
+        def char_replace(s, to_be_replaced, replacement):
+            for ch in to_be_replaced:
+                if ch in s:
+                    s = s.replace(ch, replacement)
+            return s
 
         def get_imdb_info(imdb_id):
             """extracts imdb info through imdb api"""
@@ -46,19 +53,21 @@ class Movie():
             attrs = {'imdb_id': imdb_id}
             imdb_access = imdb.IMDb()
             movie = imdb_access.get_movie(imdb_id)
-            if 'title' in movie.keys():
-                attrs['title'] = movie['title']
-            if 'plot outline' in movie.keys():
-                attrs['storyline'] = movie['plot outline']
-            if 'rating' in movie.keys():
-                attrs['rating'] = movie['rating']
-            if 'year' in movie.keys():
-                attrs['year'] = movie['year']
-            if 'full-size cover url' in movie.keys():
-                attrs['poster_image_url'] = movie['full-size cover url']
-            else:
-                if 'cover_url' in movie.keys():
-                    attrs['poster_image_url'] = movie['cover url']
+
+            # list of properties to be copied from imdb object
+            props = ['title', 'plot outline', 'rating', 'year',
+                     'full-size cover url', 'cover url']
+
+            for prop in props:
+                if prop in movie.keys():
+                    attrs[char_replace(prop, [' ', '-'], '_')] = movie[prop]
+
+            if 'full_size_cover_url' not in attrs:
+                if 'cover_url' in attrs:
+                    attrs['full_size_cover_url'] = attrs['cover_url']
+                else:
+                    attrs['full_size_cover_url'] = ''
+
             attrs['imdb_url'] = "http://www.imdb.com/title/tt" + imdb_id + "/"
 
             return attrs
@@ -73,9 +82,16 @@ class Movie():
         if trailer_youtube_id:
             attributes['trailer_youtube_id'] = trailer_youtube_id
 
+        # Add properties that were passed as arguments
         attributes.update(kwargs)
 
+        # set properties of the Movie object
         for key, value in attributes.items():
             setattr(self, key, value)
 
-        print("[+] Movie '%s' object created" % getattr(self, 'title', 'title missing'))
+        print("[+] Movie '%s' object created" % getattr(self,
+                                                        'title',
+                                                        'title missing'))
+
+# test_movie = Movie(imdb_url='http://www.imdb.com/title/tt0167260/')
+# print(test_movie.__dict__)
