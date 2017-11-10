@@ -36,9 +36,6 @@ def filter_movies(movies, *args):
     return results
 
 
-# removes films that don't have at least 'title' and 'rating' attributes
-
-
 app = Flask(__name__)
 Bootstrap(app)
 app.config['PREFERRED_URL_SCHEME'] = os.environ["PREFERRED_URL_SCHEME"]
@@ -48,7 +45,6 @@ app.config['DEBUG'] = os.environ["DEBUG"]
 
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
-    """creates an html file and renders templates in it"""
 
     form = QueryForm()
     if form.validate_on_submit():
@@ -64,11 +60,3 @@ def main_page():
 def movie_list():
     movies = [json.loads(movie) for movie in session['movies']]
     return render_template('main.html', movies=movies)
-
-
-# Starts flask server
-
-
-if __name__ == '__main__':
-    # app.debug = True
-    app.run(host='0.0.0.0', port=5051)
