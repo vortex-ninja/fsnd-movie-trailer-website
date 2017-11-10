@@ -92,9 +92,9 @@ class Movie():
         for key, value in attributes.items():
             setattr(self, key, value)
 
-        print("[+] Movie '%s' object created" % getattr(self,
-                                                        'title',
-                                                        'title missing'))
+        # print("[+] Movie '%s' object created" % getattr(self,
+        #                                                 'title',
+        #                                                 'title missing'))
 
 # test_movie = Movie(imdb_url='http://www.imdb.com/title/tt0167260/')
 # print(test_movie.__dict__)
