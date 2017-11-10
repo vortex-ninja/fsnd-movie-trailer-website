@@ -10,3 +10,7 @@
 # pyenv .python-version
 
 .python-version
+
+# environment variables setup
+
+.env
