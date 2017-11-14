@@ -5,7 +5,7 @@ import re
 from codecs import encode
 
 
-class Movie():
+class Movie(object):
     """class that stores information about a movie"""
     def __init__(self, **kwargs):
 
@@ -59,6 +59,7 @@ class Movie():
             props = ['title', 'plot outline', 'rating', 'year',
                      'full-size cover url', 'cover url']
 
+            # ensure properties are unicode
             for prop in props:
                 if prop in movie.keys():
                     prop_value = char_replace(prop, [' ', '-'], '_')
@@ -92,11 +93,11 @@ class Movie():
         for key, value in attributes.items():
             setattr(self, key, value)
 
-        # print("[+] Movie '%s' object created" % getattr(self,
-        #                                                 'title',
-        #                                                 'title missing'))
+        print("[+] Movie '%s' object created" % getattr(self,
+                                                        'title',
+                                                        'title missing'))
 
-# test_movie = Movie(imdb_url='http://www.imdb.com/title/tt0167260/')
+# test_movie = Movie(imdb_id='0110413')
 # print(test_movie.__dict__)
 # print(type(test_movie.title))
 # print(test_movie.title)

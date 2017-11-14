@@ -51,12 +51,13 @@ def main_page():
         movies = between_years(form.min_year.data,
                                form.max_year.data,
                                form.number.data)
-        session['movies'] = [json.dumps(movie.__dict__) for movie in movies]
+        m = [json.dumps(movie.__dict__, ensure_ascii=False) for movie in movies]
+        session['movies'] = m
         return redirect(url_for('movie_list'))
     return render_template('form.html', form=form)
 
 
 @app.route('/list', methods=['GET'])
 def movie_list():
-    movies = [json.loads(movie) for movie in session['movies']]
+    movies = [json.loads(movie, encoding='utf-8') for movie in session['movies']]
     return render_template('main.html', movies=movies)
