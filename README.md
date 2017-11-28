@@ -19,7 +19,7 @@ App lets you query IMDb TOP 250 list for movies released between given years.
 * Create objects yourself
 * Use `between_years()` function to generate a list of `Movie` objects
 
-When you create objects yourself you can pass as many keyword parameters as you want.
+When you create objects yourself you can pass as many keyword arguments as you want.
 Parameters that are used to display information in a rendered file are:
 * `title`
 * `trailer_youtube_url`
