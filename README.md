@@ -1,5 +1,4 @@
-# Movie Trailer Website
-fsnd-project-1
+# fsnd - movie-trailer-website
 
 ### Live demo
 
