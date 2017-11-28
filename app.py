@@ -9,7 +9,7 @@ import json
 import os
 
 
-def between_years(min_year=0, max_year=9999, n=9):
+def between_years(min_year=0, max_year=9999, n=6):
     """returns top n movies from imdb top250 list
     produced between min_year and max_year"""
 
@@ -57,7 +57,11 @@ def main_page():
     return render_template('form.html', form=form)
 
 
+big_lebowski = media.Movie(title="Big Lebowski", imdb_id="0118715",
+                           trailer_youtube_url="https://www.youtube.com/watch?v=SUXWAEX2jlg")
+
 @app.route('/list', methods=['GET'])
 def movie_list():
-    movies = [json.loads(movie, encoding='utf-8') for movie in session['movies']]
+    # movies = [json.loads(movie, encoding='utf-8') for movie in session['movies']]
+    movies = [big_lebowski]
     return render_template('main.html', movies=movies)

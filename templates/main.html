@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block page_content %}
+
 <div class="container">
     <!-- Create movie tiles -->
 
@@ -8,7 +9,7 @@
 
         <div class="col-md-6 col-lg-4 movie-tile text-center"
           {% if movie.trailer_youtube_id %}
-            data-trailer-youtube-id="{{ movie.trailer_youtube_id }}"data-toggle="modal" data-target="#trailer"
+            data-trailer-youtube-id="{{ movie.trailer_youtube_id }}" data-toggle="modal" data-target="#trailer"
           {% endif %} >
 
             {% if not movie.trailer_youtube_id and movie.imdb_id %}
@@ -27,10 +28,9 @@
               </a>
             {% endif %}
 
-          </div>
+        </div>
 
       {% endfor %}
 
-    </div>
 </div>
 {% endblock %}

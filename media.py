@@ -80,7 +80,6 @@ class Movie(object):
 
         if imdb_id:
             attributes.update(get_imdb_info(imdb_id))
-
         trailer_youtube_id = get_youtube_id(kwargs)
 
         if trailer_youtube_id:
@@ -96,8 +95,3 @@ class Movie(object):
         print("[+] Movie '%s' object created" % getattr(self,
                                                         'title',
                                                         'title missing'))
-
-# test_movie = Movie(imdb_id='0110413')
-# print(test_movie.__dict__)
-# print(type(test_movie.title))
-# print(test_movie.title)
